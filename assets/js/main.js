@@ -44,10 +44,7 @@
 
       form.querySelector('.form_button').classList.toggle("loader");
       let tx_form = {
-        "tx_data": form['tx_data'].value,
-        "tx_gas_limit": form['tx_gas_limit'].value,
-        "tx_fee": form['tx_fee'].value,
-        "tx_node_url": form['tx_node_url'].value,
+        "tx_data": form['tx_data'].value
       };
 
       const connect = await fetch(api.submit_pfb, {
