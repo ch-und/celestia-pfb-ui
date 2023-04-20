@@ -70,9 +70,7 @@
         document.getElementById("tx_info_tx_hash").innerHTML = data.txhash;
         document.getElementById("tx_info_code").innerHTML = data.code;
         document.getElementById("tx_info_tx_hash_link").setAttribute("href", api.explorer + "tx/" + data.txhash);
-        document.querySelector(".btn_check_height").setAttribute("data-namespace", data.namespace_id);
-        document.querySelector(".btn_check_height").setAttribute("data-height", data.height);
-
+        
         let txblock = document.querySelector(".transaction");
         txblock.style.display = "block";
 
