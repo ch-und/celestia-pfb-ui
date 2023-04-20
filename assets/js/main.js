@@ -1,9 +1,8 @@
 {
     // API config
     const api = {
-      submit_pfb: "/submit_pfb.php",
-      node_status: "/balance.php",
-      height: "/height",
+      submit_pfb: "/api/submit_pfb.php",
+      node_status: "/api/balance.php",
       explorer: "https://testnet.mintscan.io/celestia-incentivized-testnet/",
     };
 
