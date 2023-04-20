@@ -43,7 +43,7 @@ if (isset($reqBody->tx_data)) {
             $arr['txhash'] = $txhash;
             $arr['namespace_id'] = $namespace_id;
             $arr['data_hex'] = $tx_data;
-            $arr['data'] = $data['tx_data'];
+            $arr['data'] = $reqBody->tx_data;
             $arr['gas_wanted'] = $gas_wanted;
             $arr['gas_used'] = $gas_used;
             $arr['height'] = $height;
