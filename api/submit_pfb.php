@@ -42,7 +42,7 @@ if (isset($reqBody->tx_data)) {
         $arr['code'] = 200;
         $arr['date'] = date('Y-m-d H:i:s', time());
 
-        json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        echo json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
            
     } catch (\Throwable $th) {
         $err = '{"error": 500, "message": "' . $th->getMessage() . '"}';
