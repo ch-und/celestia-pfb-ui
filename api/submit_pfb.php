@@ -2,14 +2,14 @@
 
 const __DEFAULT_GAS__ = 80000;
 const __DEFAULT_FEE__ = 2000;
-
-if (isset($_POST['tx_data'])) {
+$reqBody = json_decode(file_get_contents('php://input'));
+if (isset($reqBody->tx_data)) {
     try {
         $curl = curl_init();
         
         $random_bytes = random_bytes(8);
         $namespace_id = bin2hex($random_bytes);
-        $tx_data = bin2hex(utf8_encode($_POST['tx_data']));
+        $tx_data = bin2hex(utf8_encode($reqBody->tx_data));
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'http://localhost:26659/submit_pfb',
