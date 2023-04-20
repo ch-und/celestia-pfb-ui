@@ -30,20 +30,28 @@ if (isset($reqBody->tx_data)) {
 
         curl_close($curl);
         $tx_submit_data = json_decode($response);
-        $arr = [];
-        
-        $arr['txhash'] = $txhash;
-        $arr['namespace_id'] = $namespace_id;
-        $arr['data_hex'] = $tx_data;
-        $arr['data'] = $data['tx_data'];
-        $arr['gas_wanted'] = $gas_wanted;
-        $arr['gas_used'] = $gas_used;
-        $arr['height'] = $height;
-        $arr['code'] = 200;
-        $arr['date'] = date('Y-m-d H:i:s', time());
 
-        echo json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-           
+        if (!isset($tx_submit_data->txhash)) {
+            $err = '{"error": 500, "message": "Transaction decline"}';
+            echo $err;
+        } else {
+            $txhash = $tx_submit_data->txhash;
+            $height = $tx_submit_data->height;
+            $gas_wanted = $tx_submit_data->gas_wanted;
+            $gas_used = $tx_submit_data->gas_used;
+            $arr = [];
+            $arr['txhash'] = $txhash;
+            $arr['namespace_id'] = $namespace_id;
+            $arr['data_hex'] = $tx_data;
+            $arr['data'] = $data['tx_data'];
+            $arr['gas_wanted'] = $gas_wanted;
+            $arr['gas_used'] = $gas_used;
+            $arr['height'] = $height;
+            $arr['code'] = 200;
+            $arr['date'] = date('Y-m-d H:i:s', time());
+    
+            echo json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        }  
     } catch (\Throwable $th) {
         $err = '{"error": 500, "message": "' . $th->getMessage() . '"}';
         echo $err;
