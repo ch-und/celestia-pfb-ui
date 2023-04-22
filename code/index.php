@@ -78,6 +78,7 @@
 
         <footer class="flex">
             <div>«ch_und | Reguide.Wiki» &copy; 2023</div>
+            <a href="https://github.com/ch-und/celestia-pfb-ui" target="_blank">Github</a>
         </footer>
     </div>
     <!-- JS -->
