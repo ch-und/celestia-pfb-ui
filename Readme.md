@@ -1,6 +1,7 @@
 # Celestia Task: Create an UI for Submitting PFB Transactions
 
-Let's create an UI for Submitting PFB Transactions with me.
+Let's create an UI for Submitting PFB Transactions with me. 
+You can read about other tasks [on My Medium](https://medium.com/@batuoc90)
 
 ## Prerequisites
 To perform this task, you must first run a lightnode. Step by step installation instructions can be found **[here](https://docs.celestia.org/nodes/light-node/)**
