@@ -1,14 +1,118 @@
 # Celestia Task: Create an UI for Submitting PFB Transactions
 
+Let's create an UI for Submitting PFB Transactions with me.
+
 ## Prerequisites
-Để thực hiện nhiệm vụ này, trước hết bạn phải chạy một lightnode. Hướng dẫn cài đặt step by step các bạn có thể tham khảo ở đây [here](https://docs.celestia.org/nodes/light-node/)
+To perform this task, you must first run a lightnode. Step by step installation instructions can be found **[here](https://docs.celestia.org/nodes/light-node/)**
 
 ## Node API calls
-Cùng tìm hiểu một chút về các api của celestia node. `celestia-node` exposes its REST gateway on port 26659 by default.
+`celestia-node` exposes its REST gateway on port 26659 by default.
+Let's take a look at some of the api we will be using in this project.
 
 ### Check Balance
-Host: http://127.0.0.1:26659
-URI: /balance
-Method: GET
+I will use this API to check wallet balance and use it as a node status check API.
 
-Response
+<table>
+  <tr>
+    <th>Host:</th>
+    <td>http://localhost:26659</td>
+  </tr>
+  <tr>
+    <th>URI:</th>
+    <td>/balance</td>
+  </tr>
+  <tr>
+    <th>Method:</th>
+    <td>GET</td>
+  </tr>
+</table>
+
+Response:
+```JSON
+{
+   "denom":"utia",
+   "amount":"999995000000000"
+}
+```
+
+### Submit a PFB transaction
+In this example, we will be submitting a `PayForBlob` transaction to the node's `/submit_pfb` endpoint.
+
+<table>
+  <tr>
+    <th>Host:</th>
+    <td>http://localhost:26659</td>
+  </tr>
+  <tr>
+    <th>URI:</th>
+    <td>/submit_pfb</td>
+  </tr>
+  <tr>
+    <th>Method:</th>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <th>Body:</th>
+    <td>
+        ```JSON
+            {
+                "namespace_id": "0c204d39600fddd3",
+                "data": "f1f20ca8007e910a3bf8b2e61da0f26bca07ef78717a6ea54165f5",
+                "gas_limit": 80000,
+                "fee": 2000
+            }
+        ```
+    </td>
+  </tr>
+</table>
+
+Some things to consider:
+
+- PFB is a `PayForBlob` Message.
+- The endpoint also takes in a `namespace_id` and `data` values.
+- Namespace ID should be 8 bytes.
+- Data is in hex-encoded bytes of the raw message.
+- `gas_limit` is the limit of gas to use for the transaction
+
+
+## Install
+
+Dự án này tôi sử dụng php để phát triển. Tôi đã thử sử dụng docker để thuận tiện trong việc cài đặt, tuy nhiên khi gửi request tới localhost thì không tới được lightnode.
+Vì vậy, tôi với các bạn sẽ dùng apache để host dự án này nhé.
+Cài đặt apache webserver
+`sudo apt install apache2`
+
+Cài đặt php
+`sudo apt install php libapache2-mod-php php-common php-curl php-mbstring`
+
+Creating a Virtual Host
+```shell
+cd /var/www
+sudo git clone https://github.com/ch-und/celestia-pfb-ui
+sudo chown -R $USER:$USER /var/www/celestia-pfb-ui
+sudo nano /etc/apache2/sites-available/celestia-pfb-ui.conf
+```
+
+Include the following content in this file:
+```
+<VirtualHost *:80>
+    ServerName localhost
+    ServerAlias localhost 
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/celestia-pfb-ui
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+Now, use a2ensite to enable the new virtual host and a2dissite to disable default host
+```
+sudo a2ensite celestia-pfb-ui
+sudo a2dissite 000-default
+```
+To make sure your configuration file doesn’t contain syntax errors, run the following command:
+```sudo apache2ctl configtest```
+Finally, reload Apache so these changes take effect:
+```sudo systemctl reload apache2```
+
+So, you can visit the result here:
+http://193.30.120.228/
