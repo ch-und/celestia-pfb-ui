@@ -54,14 +54,12 @@ In this example, we will be submitting a `PayForBlob` transaction to the node's 
   <tr>
     <th>Body:</th>
     <td>
-        ```JSON
-            {
-                "namespace_id": "0c204d39600fddd3",
-                "data": "f1f20ca8007e910a3bf8b2e61da0f26bca07ef78717a6ea54165f5",
-                "gas_limit": 80000,
-                "fee": 2000
-            }
-        ```
+        {
+            "namespace_id": "0c204d39600fddd3",
+            "data": "f1f20ca8007e910a3bf8b2e61da0f26bca07ef78717a6ea54165f5",
+            "gas_limit": 80000,
+            "fee": 2000
+        }
     </td>
   </tr>
 </table>
