@@ -69,7 +69,7 @@
         document.getElementById("tx_info_encode_data").innerHTML = data.data_hex;
         document.getElementById("tx_info_tx_hash").innerHTML = data.txhash;
         document.getElementById("tx_info_code").innerHTML = data.code;
-        document.getElementById("tx_info_tx_hash_link").setAttribute("href", api.explorer + "tx/" + data.txhash);
+        document.getElementById("tx_info_tx_hash_link").setAttribute("href", api.explorer + "txs/" + data.txhash);
         
         let txblock = document.querySelector(".transaction");
         txblock.style.display = "block";
