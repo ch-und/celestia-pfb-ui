@@ -76,13 +76,17 @@ Some things to consider:
 
 ## Install
 
-Dự án này tôi sử dụng php để phát triển. Tôi đã thử sử dụng docker để thuận tiện trong việc cài đặt, tuy nhiên khi gửi request tới localhost thì không tới được lightnode.
-Vì vậy, tôi với các bạn sẽ dùng apache để host dự án này nhé.
-Cài đặt apache webserver
-`sudo apt install apache2`
+This project I use php for development. I have tried to use docker for convenience in deployment, but when sending request to celestia-node gateway it fails. So I will use apache to host this project.
 
-Cài đặt php
-`sudo apt install php libapache2-mod-php php-common php-curl php-mbstring`
+Install apache webserver
+```shell
+sudo apt install apache2
+```
+
+Install php
+```shell
+sudo apt install php libapache2-mod-php php-common php-curl php-mbstring
+```
 
 Creating a Virtual Host
 ```shell
